@@ -1,0 +1,98 @@
+package pkg2d.array;
+import java.util.ArrayList;
+import java.util.Scanner;
+public class Array {
+
+    static int num,total,qty;
+    public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);        
+        ArrayList order = new ArrayList(); //empty array
+          
+        String foods[][]= {
+            {"Hotdogg","10"},
+            {"Buwad","20"},
+            {"Chicken","25"},
+            {"Nuggets","50"}      
+        };
+         
+        for(int row=0; row<foods.length; row++){   
+            for(int col=0; col<foods[row].length; col++){
+                System.out.print(row+1+". P"+foods[row][col]);
+            }
+            System.out.println();
+        }     
+        for(int yes=0; yes<1; yes++){             
+             for(int i=0; i<1; i++){
+                    System.out.print("Enter number: ");      
+                    if(scanner.hasNextInt()){
+                        num = scanner.nextInt();
+                        
+                        if (num > foods.length){
+                            System.err.println("Index out of bound!");
+                            i--;
+                        }
+                    }
+                    else {
+                        System.err.println("Invalid input!");
+                        scanner.next();
+                        i--;   
+                    } 
+                }
+             
+            // no need to use case or if else just use this code instead ----
+                int price = 0;
+                String FoodName;
+                FoodName = (foods[num-1][0]); // para nis name sa item
+                price = Integer.parseInt(foods[num-1][1]); // para nis price
+                System.out.print("\n"+FoodName);
+                System.out.println(" "+price);
+            // ----------------------------------------------------------
+                        //validation for quantity
+                        for(int quant=0; quant<1; quant++){
+                            System.out.print("Enter Quantity: ");
+                            if(scanner.hasNextInt()){
+                                 qty = scanner.nextInt();
+                            }
+                            else {
+                                System.err.println("Invalid Input");
+                                quant--;
+                                scanner.next();
+                            }
+                        }                 
+                order.add(FoodName+" P"+price*qty);
+                System.out.println("Your Cart: "+order);
+                
+                total = total+price*qty; //grand total
+                System.out.println("Total: "+total);
+                // ORDER AGAIN
+            for(int again=0; again<1; again++){
+                System.out.print("\nOrder Again?: ");
+                String orderAgain = scanner.next();
+
+                if(orderAgain.equalsIgnoreCase("y")){
+                    yes--; // if mo yes balik siya sa for loop yes
+                }
+                else if(orderAgain.equalsIgnoreCase("n")){ 
+                    
+                    for(int money=0; money<1; money++){
+                        System.out.print("Enter Cash: ");
+                        Double cash = scanner.nextDouble();
+
+                        if(cash < total){
+                            System.err.println("Not enough Cash!");
+                            money--;                        
+                        }
+                        else{
+                            System.out.println("Thank you for buying!");
+                            System.out.println("Your Cart: "+order);
+                        }
+                    }          
+                }
+                else {
+                    System.out.println("Invalid input!");
+                    again--; // if mo yes balik siya sa for loop again
+                }
+            }//end of for loop again
+        }//end loop yes
+    }   
+}
